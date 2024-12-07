@@ -7,40 +7,40 @@ function getAvailableSlots(date, availableSlots) {
     return [];
   }
   const slotData = availableSlots.find(
-    (slot) => slot.date === date.toISOString().split('T')[0] // Compare date in YYYY-MM-DD format
+    (slot) => slot.date === date.toISOString().split('T')[0] 
   );
   return slotData ? slotData.slots : [];
 }
 
 const CustomCalendar = ({ availableSlots = [], setSelectedDate, setSelectedTimeSlot }) => {
   const [selectedDate, setLocalSelectedDate] = useState(new Date());
-  const [showDropdown, setShowDropdown] = useState(null); // Tracks which date has a dropdown
+  const [showDropdown, setShowDropdown] = useState(null); 
   const [selectedSlot, setSelectedSlot] = useState('');
 
   useEffect(() => {
     const slotsForDay = getAvailableSlots(selectedDate, availableSlots);
     if (slotsForDay.length > 0) {
-      setShowDropdown(selectedDate); // Show dropdown if slots are available for the initial date
+      setShowDropdown(selectedDate); 
     } else {
-      setShowDropdown(null); // Hide dropdown if no slots are available for the initial date
+      setShowDropdown(null); 
     }
   }, [selectedDate, availableSlots]);
 
   const handleDateClick = (date) => {
     setLocalSelectedDate(date);
-    setSelectedDate(date); // Update the parent component's selectedDate state
+    setSelectedDate(date);
     const slotsForDay = getAvailableSlots(date, availableSlots);
     if (slotsForDay.length > 0) {
       setShowDropdown(date);
     } else {
       setShowDropdown(null);
-      setSelectedTimeSlot(''); // Clear the selected time slot if no slots are available
+      setSelectedTimeSlot(''); 
     }
   };
 
   const handleSlotChange = (e) => {
-    setSelectedSlot(e.target.value); // Update the selected slot state
-    setSelectedTimeSlot(e.target.value); // Update the parent component's selectedTimeSlot state
+    setSelectedSlot(e.target.value);
+    setSelectedTimeSlot(e.target.value); 
   };
 
   const daysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
@@ -74,7 +74,7 @@ const CustomCalendar = ({ availableSlots = [], setSelectedDate, setSelectedTimeS
           const isSelected = date && date.toDateString() === selectedDate.toDateString();
           const isToday = date && date.toDateString() === currentDay;
           const slotsForDay = day ? getAvailableSlots(date, availableSlots) : [];
-          const highlightDates = [22, 23, 24, 25, 26]; // Highlighted dates
+          const highlightDates = [22, 23, 24, 25, 26]; 
           const isHighlighted = day && highlightDates.includes(day);
 
           return (
@@ -130,7 +130,7 @@ const CustomCalendar = ({ availableSlots = [], setSelectedDate, setSelectedTimeS
       {renderDaysOfWeek()}
       {renderDates()}
 
-      {/* Render the dropdown below the calendar */}
+
       {showDropdown && (
         <div className="mt-2 p-2 border rounded-lg bg-white shadow-md">
           <h4 className="text-xs font-medium text-gray-600">Select a Slot for {showDropdown.toDateString()}</h4>

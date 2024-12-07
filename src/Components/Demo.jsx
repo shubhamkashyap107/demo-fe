@@ -2,21 +2,21 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Loader from "./Loader";
 import Modal from "react-modal";
-import Calendar from "./Calender";  // Custom Calendar component
+import Calendar from "./Calender";  
 
 const Profile = () => {
   const { id } = useParams();
   const [mentorData, setMentorData] = useState();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [availableSlots, setAvailableSlots] = useState([]); // For storing available slots
+  const [availableSlots, setAvailableSlots] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
       const res = await fetch(`http://localhost:8080/profile?id=${id}`);
       const data = await res.json();
       setMentorData(data);
-      setAvailableSlots(data.availableSlots); // Assuming availableSlots is part of mentor data
+      setAvailableSlots(data.availableSlots);
       console.log(data.availableSlots);
     };
 
@@ -27,11 +27,11 @@ const Profile = () => {
 
   return mentorData ? (
     <div className="min-h-screen bg-gradient-to-r from-blue-50 to-white mt-10">
-      <div className="flex justify-center items-center pt-10 pb-20"> {/* Adjusted padding */}
+      <div className="flex justify-center items-center pt-10 pb-20"> 
         <div className="w-4/12 flex justify-center items-center">
           <img
             src={mentorData.portrait}
-            className="rounded-full shadow-lg w-80 h-80 object-cover" // Made the image larger
+            className="rounded-full shadow-lg w-80 h-80 object-cover" 
             alt="Mentor"
           />
         </div>
@@ -52,7 +52,7 @@ const Profile = () => {
         </div>
       </div>
 
-      {/* Modal */}
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={toggleModal}
@@ -67,12 +67,12 @@ const Profile = () => {
           Select your preferred date to schedule a session with {mentorData.name}.
         </p>
 
-        {/* Custom Calendar with reduced size */}
+     
         <Calendar 
           availableSlots={availableSlots} 
           selectedDate={selectedDate} 
           setSelectedDate={setSelectedDate} 
-          className="w-72 mx-auto" // Reduce calendar width
+          className="w-72 mx-auto" 
         />
 
         <div className="mt-6 flex justify-center space-x-6">

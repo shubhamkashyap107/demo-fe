@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Modal from 'react-modal'; // Assuming you're using react-modal or similar
+import Modal from 'react-modal'; 
 import CustomCalendar from './Calender';
 import Loader from './Loader';
 import { useDispatch } from 'react-redux';
@@ -13,8 +13,8 @@ const Profile = () => {
   const [mentorData, setMentorData] = useState();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState(''); // New state for the selected time slot
-  const [availableSlots, setAvailableSlots] = useState([]); // For storing available slots
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(''); 
+  const [availableSlots, setAvailableSlots] = useState([]);
 
 
   
@@ -24,7 +24,7 @@ const Profile = () => {
       const res = await fetch(`https://demo-be-x9vd.onrender.com/profile?id=${id}`);
       const data = await res.json();
       setMentorData(data);
-      setAvailableSlots(data.availableSlots); // Assuming availableSlots is part of mentor data
+      setAvailableSlots(data.availableSlots); 
     };
 
     getData();
@@ -137,7 +137,7 @@ const Profile = () => {
         </div>
       </div>
 
-      {/* Modal for Booking a Session */}
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={toggleModal}
@@ -152,12 +152,12 @@ const Profile = () => {
           Select your preferred date and time to schedule a session with {mentorData?.name}.
         </p>
 
-        {/* Custom Calendar */}
+
         <CustomCalendar
           availableSlots={availableSlots}
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
-          setSelectedTimeSlot={setSelectedTimeSlot} // Pass down the setter for time slot
+          setSelectedTimeSlot={setSelectedTimeSlot}
         />
 
         <div className="mt-6 flex justify-center space-x-6">

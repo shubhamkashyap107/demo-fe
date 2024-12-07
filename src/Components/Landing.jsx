@@ -3,7 +3,7 @@ import React from "react";
 const Landing = () => {
   return (
     <section className="flex flex-col md:flex-row items-center justify-between bg-gray-50 p-8 md:p-16 mt-8">
-      {/* Left Side: Image */}
+  
       <div className="flex-shrink-0 w-full md:w-1/3">
         <img
           src="https://plus.unsplash.com/premium_photo-1668383776856-618354131aa0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8bWVudG9yfGVufDB8fDB8fHww"
@@ -12,7 +12,7 @@ const Landing = () => {
         />
       </div>
 
-      {/* Right Side: Text */}
+      
       <div className="mt-8 md:mt-0 md:ml-12 w-full md:w-2/3">
         <h1 className="text-4xl font-bold text-gray-800">
           Unlock Your Potential with Expert Mentorship
