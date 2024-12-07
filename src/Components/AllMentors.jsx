@@ -9,7 +9,7 @@ const AllMentors = () => {
     useEffect(() => {
         const getData = async () => {
 
-            const res = await fetch("http://localhost:8080/mentors")
+            const res = await fetch("https://demo-fe-km9m.onrender.com/mentors")
             const data = await res.json()
 
             setMentorsData(data)

@@ -8,7 +8,7 @@ const Mentors = () => {
 
     useEffect(() => {
 
-        fetch("http://localhost:8080/mentors?num=5")
+        fetch("https://demo-be-x9vd.onrender.com/mentors?num=6")
         .then((res) => {
             return res.json()
         })

@@ -21,7 +21,7 @@ const Profile = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await fetch(`http://localhost:8080/profile?id=${id}`);
+      const res = await fetch(`https://demo-be-x9vd.onrender.com/profile?id=${id}`);
       const data = await res.json();
       setMentorData(data);
       setAvailableSlots(data.availableSlots); // Assuming availableSlots is part of mentor data
