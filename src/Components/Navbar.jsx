@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux"; // Import useSelector to access Redux store
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const location = useLocation(); // Get the current location
+  
+  // Access the number of sessions from Redux store
+  const sessionCount = useSelector((state) => state.Session.length); 
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -37,13 +41,12 @@ const Navbar = () => {
         <div className="flex items-center space-x-6 ml-auto">
           {/* Search Bar */}
           <div className="relative flex items-center w-64">
-          <input
-            type="text"
-            id="search-desktop"
-            className="w-full p-2 pr-10 text-sm text-gray-700 border border-gray-300 rounded-lg focus:outline-none bg-white"
-            placeholder="Search..."
-          />
-
+            <input
+              type="text"
+              id="search-desktop"
+              className="w-full p-2 pr-10 text-sm text-gray-700 border border-gray-300 rounded-lg focus:outline-none bg-white"
+              placeholder="Search..."
+            />
             <button
               type="button"
               className="absolute right-0 top-0 bottom-0 flex items-center justify-center p-2 text-gray-500 hover:text-gray-700"
@@ -72,30 +75,30 @@ const Navbar = () => {
             <li>
               <Link
                 to="/"
-                className={`${
-                  isActive("/")
-                }`}
+                className={`${isActive("/")}`}
                 aria-current={location.pathname === "/" ? "page" : undefined}
               >
                 Home
               </Link>
             </li>
-            <li>
+            <li className="relative"> {/* Add relative positioning to the link */}
               <Link
                 to="/sessions"
-                className={`${
-                  isActive("/sessions")
-                }`}
+                className={`${isActive("/sessions")}`}
               >
                 My Sessions
+                {/* Display red pill if there are sessions */}
+                {sessionCount > 0 && (
+                  <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-semibold shadow-lg">
+                    {sessionCount}
+                  </span>
+                )}
               </Link>
             </li>
             <li>
               <Link
                 to="/services"
-                className={`${
-                  isActive("/services")
-                }`}
+                className={`${isActive("/services")}`}
                 aria-current={location.pathname === "/services" ? "page" : undefined}
               >
                 Services
